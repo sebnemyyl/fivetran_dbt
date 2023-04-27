@@ -1,38 +1,42 @@
-
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
-name: 'fivetran_dbt'
-version: '1.0.0'
-config-version: 2
-
-# This setting configures which "profile" dbt uses for this project.
-profile: 'fivetran_dbt'
-
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
-model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
-seed-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
-
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
-  - "target"
-  - "dbt_packages"
-
-
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
-models:
-  fivetran_dbt:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+version: 2
+sources:
+  - name: google_sheets
+    description: >
+      This source contains data stored in Google Sheets that are manually maintained.
+    project: fivetran_test
+    dataset: fivetran_test
+    loader: external_table
+    tags:
+      - source
+      - google_sheet
+    tables:
+      - name: Fivetran_test
+        description: >
+          Marketing source channels, categories, etc.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1LkRVus6ZIOBdblnM-SnTmVMKEgAGDXuV5y_Jt9KcynM/edit#gid=0']
+            sheet_range: Fivetran_test
+            skip_leading_rows: 1
+        columns:
+          - name: course_id
+            data_type: INTEGER
+          - name: course_title
+            data_type: STRING
+          - name: programme
+            data_type: INTEGER
+          - name: ects
+            data_type: STRING
+          - name: ufind_link
+            data_type: STRING
+          - name: comment
+            data_type: STRING
+          - name: decision
+            data_type: STRING
+          - name: application_foundation
+            data_type: STRING
+          - name: reason_rejected
+            data_type: STRING          
+          - name: note
+            data_type: STRING
