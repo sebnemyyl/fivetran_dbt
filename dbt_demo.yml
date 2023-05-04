@@ -1,0 +1,42 @@
+version: 2
+sources:
+  - name: fivetran_test
+    description: >
+      This source contains data stored in Google Sheets that are manually maintained.
+    project: fivetran_test
+    dataset: fivetran_test
+    loader: external_table
+    tags:
+      - source
+      - google_sheet
+    tables:
+      - name: Fivetran_test
+        description: >
+          Marketing source channels, categories, etc.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1LkRVus6ZIOBdblnM-SnTmVMKEgAGDXuV5y_Jt9KcynM/edit#gid=0']
+            sheet_range: Fivetran_test
+            skip_leading_rows: 1
+        columns:
+          - name: course_id
+            data_type: INTEGER
+          - name: course_title
+            data_type: STRING
+          - name: programme
+            data_type: INTEGER
+          - name: ects
+            data_type: STRING
+          - name: ufind_link
+            data_type: STRING
+          - name: comment
+            data_type: STRING
+          - name: decision
+            data_type: STRING
+          - name: application_foundation
+            data_type: STRING
+          - name: reason_rejected
+            data_type: STRING          
+          - name: note
+            data_type: STRING
