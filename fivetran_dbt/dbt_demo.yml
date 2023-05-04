@@ -1,6 +1,6 @@
 version: 2
 sources:
-  - name: fivetran_test.fivetran_test
+  - name: fivetran_test
     description: >
       This source contains data stored in Google Sheets that are manually maintained.
     project: fivetran_test
