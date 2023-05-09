@@ -3,6 +3,5 @@ version: 2
 
 sources:
   - name: fivetran_test
-  - database: fivetran_test
     tables:
       - name: fivetran_test
