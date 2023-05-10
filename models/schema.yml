@@ -10,4 +10,12 @@ models:
         tests:
           - unique
           - not_null
+  - name: jira
+    description: "A jira transformation"
+    columns:
+      - name: time_spent_seconds
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
 
